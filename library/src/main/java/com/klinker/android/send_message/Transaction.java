@@ -645,7 +645,6 @@ public class Transaction {
                 intent = explicitSentMmsReceiver;
             }
 
-            intent.putExtra(MmsSentReceiver.EXTRA_CONTENT_URI, messageUri.toString());
             if (Utils.isDefaultSmsApp(context)) {
                 PduPersister persister = PduPersister.getPduPersister(context);
                 Uri messageUri = persister.persist(sendReq, Uri.parse("content://mms/outbox"),
