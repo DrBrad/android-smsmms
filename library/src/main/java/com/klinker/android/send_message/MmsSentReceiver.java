@@ -40,17 +40,22 @@ public abstract class MmsSentReceiver extends StatusUpdatedReceiver {
     public final void updateInInternalDatabase(Context context, Intent intent, int resultCode) {
         Log.v(TAG, "MMS has finished sending, marking it as so, in the database");
 
-        Uri uri = Uri.parse(intent.getStringExtra(EXTRA_CONTENT_URI));
-        Log.v(TAG, uri.toString());
+        String extraContentUri = intent.getStringExtra(EXTRA_CONTENT_URI);
+        if (!TextUtils.isEmpty(extraContentUri)) {
+            Uri uri = Uri.parse(extraContentUri);
+            Log.v(TAG, uri.toString());
 
-        ContentValues values = new ContentValues(1);
-        values.put(Telephony.Mms.MESSAGE_BOX, Telephony.Mms.MESSAGE_BOX_SENT);
-        SqliteWrapper.update(context, context.getContentResolver(), uri, values,
-                null, null);
+            ContentValues values = new ContentValues(1);
+            values.put(Telephony.Mms.MESSAGE_BOX, Telephony.Mms.MESSAGE_BOX_SENT);
+            SqliteWrapper.update(context, context.getContentResolver(), uri, values,
+                    null, null);
+        }
 
         String filePath = intent.getStringExtra(EXTRA_FILE_PATH);
-        Log.v(TAG, filePath);
-        new File(filePath).delete();
+        if (!TextUtils.isEmpty(filePath)) {
+            Log.v(TAG, filePath);
+            new File(filePath).delete();
+        }
     }
 
 }
