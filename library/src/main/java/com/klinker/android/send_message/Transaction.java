@@ -636,9 +636,6 @@ public class Transaction {
             File mSendFile = new File(context.getCacheDir(), fileName);
 
             SendReq sendReq = buildPdu(context, addresses, subject, parts);
-            PduPersister persister = PduPersister.getPduPersister(context);
-            Uri messageUri = persister.persist(sendReq, Uri.parse("content://mms/outbox"),
-                    true, settings.getGroup(), null);
 
             Intent intent;
             if (explicitSentMmsReceiver == null) {
