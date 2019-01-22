@@ -405,7 +405,7 @@ public class Transaction {
             byte[] imageBytes = Message.bitmapToByteArray(image[i]);
 
             MMSPart part = new MMSPart();
-            part.MimeType = "image/jpeg";
+            part.MimeType = "image/png";
             part.Name = (imageNames != null) ? imageNames[i] : ("image_" + System.currentTimeMillis());
             part.Data = imageBytes;
             data.add(part);
