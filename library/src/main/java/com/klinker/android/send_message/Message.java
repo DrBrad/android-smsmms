@@ -525,7 +525,7 @@ public class Message {
         }
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		try {
-			image.compress(Bitmap.CompressFormat.JPEG, 90, stream);
+			image.compress(Bitmap.CompressFormat.PNG, 90, stream);
 			output = stream.toByteArray();
 		} finally {
 			try {
